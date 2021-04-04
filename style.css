@@ -1,0 +1,42 @@
+*{
+	font-family: Roboto, sans-serif;
+	font-size: 25px;
+	color: white;
+}
+body{
+	background-color: #111;
+	padding: 5px;
+}
+#bring{
+	background-color: #111;
+	padding: 10px;
+	width: 75vw;
+	border: none;
+	border-radius: 0 !important;
+	border-bottom: 0px solid #111;
+	font-family: "Ubuntu Mono",monospace;
+	transition: border-bottom 0.5s;
+	background-color: #222
+}
+#bring:focus{
+	border: none;
+	border-bottom: 1px solid white;
+	/*transition: border-bottom 0.5s;*/
+}
+#bring-wrapper{
+	text-align: center;
+}
+button{
+	border-radius: 5px;
+	background-color: #000;
+	border: none;
+	margin: 10px;
+}
+message{
+	background-color: #222;
+	border-radius: 10px;
+	display: block;
+	font-size: 20px;
+	padding: 5px;
+	margin-top: 5px
+}
