@@ -1,0 +1,9 @@
+{
+	"name": "BringNow",
+	"short_name": "Bring",
+	"start_url": "https://bring.vercel.app",
+	"background_color": "#111111",
+	"display": "standalone",
+	"description": "A \'handy\' website for uh, stuff",
+	"theme-color": "#222222"
+}
