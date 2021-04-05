@@ -12,7 +12,7 @@ body{
 	padding: 10px;
 	width: 75vw;
 	border: none;
-	border-radius: 0 !important;
+	border-radius: 1 !important;
 	border-bottom: 0px solid #111;
 	font-family: "Ubuntu Mono",monospace;
 	transition: border-bottom 0.5s;
@@ -20,7 +20,7 @@ body{
 }
 #bring:focus{
 	border: none;
-	border-bottom: 1px solid white;
+	border-bottom: 5px solid white;
 	/*transition: border-bottom 0.5s;*/
 }
 #bring-wrapper{
@@ -39,4 +39,8 @@ message{
 	font-size: 20px;
 	padding: 5px;
 	margin-top: 5px
+}
+a{
+	font-size: 20px;
+	color: #43f;
 }

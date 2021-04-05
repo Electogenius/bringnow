@@ -13,7 +13,7 @@ function firstSpaceSplit(string) {
 	if(string.includes(" ")){
 		return [string.slice(0, string.indexOf(" ")), string.slice(string.indexOf(" ") + 1, string.length)]
 	}
-	return [string, undefined]
+	return [string, ""]
 }
 function add(name, funct) {
 	brings[name] = funct
@@ -32,6 +32,10 @@ add("clog", function(l){
 add("d", function(term){
 	window.location = "https://duckduckgo.com/?q="+encodeURI(term)
 })
-add("show", function(term){
-	output(term.replace(/</g, "&lt;"))
+add("g", function(term){
+	window.location = "https://google.com/search?q="+encodeURI(term)
+})
+add("go", (url)=>window.location=url)
+add("show", function(text){
+	output(text.replace(/</g, "&lt;"))
 })
