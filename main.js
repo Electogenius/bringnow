@@ -1,7 +1,7 @@
 var brings = {}
 var bringbox = document.getElementById("bring")
 function run(code){
-	var c = firstSpaceSplit(code)[0]
+	var c = firstSpaceSplit(code)[0].toLowerCase()
 	var text = firstSpaceSplit(code)[1]
 	if(brings[c]!=undefined){
 	brings[c](text)
@@ -46,4 +46,10 @@ add("save", function(text){
 		localStorage.setItem("save", text)
 		output("saved")
 	}
+})
+add("yt", (term)=>{
+	open("https://youtube.com/results?search_query=" + encodeURI(term))
+})
+add("ama", (term)=>{
+	open("https://www.amazon.com/s?k="+encodeURI(term))
 })
