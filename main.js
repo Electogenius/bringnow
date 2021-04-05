@@ -32,3 +32,6 @@ add("clog", function(l){
 add("d", function(term){
 	window.location = "https://duckduckgo.com/?q="+encodeURI(term)
 })
+add("show", function(term){
+	output(term.replace(/</g, "&lt;"))
+})
