@@ -1,0 +1,55 @@
+<script>
+var doc = 
+`# List of brings (commands)-#
+<small>Have a suggestion? Just add an issue/pr in the github repository</small>
+
+- clog: log to console/-
+- d: search with duckduckgo (leave parameters empty for duckduckgo search page)/-
+- g: search with google (leave parameters empty for google)/-
+- show: show a message/-
+
+# Other things-#
+Click/tap on a message to remove it
+`
+window.onload=()=>{
+	document.getElementById("doc").innerHTML = prepareDoc(doc)
+}
+</script>
+<a href="index.html">«back</a>
+<div id="doc">
+	
+</div>
+<script type="text/javascript" charset="utf-8">
+	function prepareDoc(d){
+		var c = d
+		c=c.replace(/\n/g, "<br>")
+		c=c.replace(/# /g, "<h1>")
+		c=c.replace(/-#/g, "</h1>")
+		c=c.replace(/- /g, "<li>")
+		c=c.replace(/\/-/g, "</li>")
+		return c
+	}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+<style type="text/css" media="all">
+	*{
+		font-family: Roboto, sans-serif;
+	}
+	body{
+		background-color: #111;
+		color: white;
+		padding: 5px
+	}
+	h1{
+		border-bottom: 1px solid #fff
+	}
+	li{
+		padding-bottom: 0px
+	}
+	a{
+		color: white;
+		background-color: green;
+		padding: 3px;
+		border-radius: 3px
+	}
+</style>

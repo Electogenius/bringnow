@@ -39,3 +39,11 @@ add("go", (url)=>window.location=url)
 add("show", function(text){
 	output(text.replace(/</g, "&lt;"))
 })
+add("save", function(text){
+	if (text == "") {
+		output(localStorage.getItem("save").replace(/</g, "&lt;"))
+	}else{
+		localStorage.setItem("save", text)
+		output("saved")
+	}
+})
