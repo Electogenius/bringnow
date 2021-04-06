@@ -53,3 +53,12 @@ add("yt", (term)=>{
 add("ama", (term)=>{
 	open("https://www.amazon.com/s?k="+encodeURI(term))
 })
+add("w", (term)=>{
+	window.location="https://en.wikipedia.org/w/index.php?search="+encodeURI(term)+"&title=Special%3ASearch&go=Go&ns0=1"
+})
+add("how", (term)=>{
+	window.location="https://www.wikihow.com/wikiHowTo?search="+encodeURI(term)
+})
+add("gh",(term)=>{
+	window.location="https://github.com/search?q="+encodeURI(term)
+})
