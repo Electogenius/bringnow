@@ -45,7 +45,7 @@ add("show", function(text){
 })
 add("save", function(text){
 	if (text == "") {
-		output(localStorage.getItem("save").replace(/</g, "&lt;"))
+		output(localStorage.getItem("save")?.replace(/</g, "&lt;"))
 	}else{
 		localStorage.setItem("save", text)
 		output("saved")
