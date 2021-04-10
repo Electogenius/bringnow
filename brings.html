@@ -24,6 +24,7 @@ window.onload=()=>{
 }
 </script>
 <a href="index.html">«back</a>
+<h1>Help</h1>
 <div id="doc">
 	
 </div>
@@ -31,8 +32,8 @@ window.onload=()=>{
 	function prepareDoc(d){
 		var c = d
 		c=c.replace(/\n/g, "<br>")
-		c=c.replace(/# /g, "<h1>")
-		c=c.replace(/-#/g, "</h1>")
+		c=c.replace(/# /g, "<h2>")
+		c=c.replace(/-#/g, "</h2>")
 		c=c.replace(/- /g, "<li><code>")
 		c=c.replace(/\/-/g, "</li>")
 		c=c.replace(/: /g, "</code>: ")
@@ -47,7 +48,7 @@ window.onload=()=>{
 		color: white;
 		padding: 5px
 	}
-	h1{
+	h2{
 		border-bottom: 1px solid #fff
 	}
 	li{

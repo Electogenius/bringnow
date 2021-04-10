@@ -5,6 +5,9 @@ if (window.location.href.includes('?')) {
   bringbox.value = decodeURI(window.location.href.slice(window.location.href.indexOf("?") + 1, window.location.href.length))
 }
 function run(code){
+	if (!code) {
+		return "";
+	}
 	var c = firstSpaceSplit(code)[0].toLowerCase()
 	var text = firstSpaceSplit(code)[1]
 	if(brings[c]!=undefined){
