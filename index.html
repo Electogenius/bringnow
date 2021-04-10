@@ -11,14 +11,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 
 <body>
 	<h1>BringNow</h1>
 	<div id="bring-wrapper">
 	<input type="search" id="bring" autocapitalize="off" onsearch="run(bringbox.value)">
-	<button onclick="run(document.getElementById('bring').value)">Go</button>
-	<button onclick="document.getElementById('bring').value = ''">Clear</button>
+	<button onclick="run(document.getElementById('bring').value)"><i class="fas fa-chevron-right"></i></button>
+	<button onclick="document.getElementById('bring').value = ''"><i class="fas fa-times"></i></button>
 	<div id="messages">
 		
 	</div>
