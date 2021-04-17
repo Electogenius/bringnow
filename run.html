@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>run</title>
+	<style type="text/css" media="all">
+		body {
+			background-color: black;
+			color: white;
+		}
+
+		input {
+			color: white;
+			background-color: black;
+			border: none;
+		}
+		m{
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<input type="search" name="" id="bring" value="" />
+	<div id="messages">
+	</div>
+	<script src="main.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		if (window.location.href.includes("?")) {
+			run(decodeURI(window.location.search.slice(1, window.location.search.length)))
+		}
+		setTimeout(function() {
+			window.location = window.location.href.replace("run.html", "")
+		}, 500)
+	</script>
+</body>
+
+</html>

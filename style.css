@@ -57,3 +57,7 @@ button:hover{
 	float: right;
 	opacity: 0.5
 }
+window{
+	display: block;
+	
+}

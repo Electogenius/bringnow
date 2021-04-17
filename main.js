@@ -33,20 +33,36 @@ function output(text){
 	}
 	document.getElementById('messages').appendChild(m)
 }
-add("clog", function(l){
+function popup(text) {
+	var win = document.createElement("window")
+	var cl = document.createElement("i")
+	cl.classList.add("fa")
+	cl.classList.add("fa-times")
+	cl.style.float = "right"
+	cl.style.display = "block"
+	cl.innerHTML = "x"
+	cl.onclick = ()=>{
+		event.target.parentNode.remove()
+		console.log(event.target.parentNode)
+	}
+	win.appendChild(cl)
+	win.innerHTML += text
+	document.body.appendChild(win)
+}
+add("clog", (l)=>{
 	console.log(l)
 })
-add("d", function(term){
+add("d", (term)=>{
 	window.location = "https://duckduckgo.com/?q="+encodeURI(term)
 })
-add("g", function(term){
+add("g", (term)=>{
 	window.location = "https://google.com/search?q="+encodeURI(term)
 })
 add("go", (url)=>window.location=url)
-add("show", function(text){
+add("show", (text)=>{
 	output(text.replace(/</g, "&lt;"))
 })
-add("save", function(text){
+add("save", (text)=>{
 	if (text == "") {
 		output(localStorage.getItem("save")?.replace(/</g, "&lt;"))
 	}else{
@@ -68,4 +84,7 @@ add("how", (term)=>{
 })
 add("gh",(term)=>{
 	window.location="https://github.com/search?q="+encodeURI(term)
+})
+add("popup",(text)=>{
+	popup(text)
 })
