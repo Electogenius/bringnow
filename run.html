@@ -29,7 +29,8 @@
 	<script src="main.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		if (window.location.href.includes("?")) {
-			run(decodeURI(window.location.search.slice(1, window.location.search.length)))
+			var x = (window.location.search.replace(/\+/, '%20'))
+			run(decodeURI(x.split(1, x.length)))
 		}
 		setTimeout(function() {
 			window.location = window.location.href.replace("run.html", "")
