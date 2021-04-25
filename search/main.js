@@ -1,4 +1,5 @@
 function search(a) {
+  document.querySelector('#messages').innerHTML = '';
   fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://bringnow-eg-server.vercel.app/api?search=' + a)}`)
     .then(response => {
       if (response.ok) return response.json()
