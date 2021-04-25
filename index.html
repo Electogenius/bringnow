@@ -18,12 +18,11 @@
 	<h1>BringNow <a class="help" href="/brings.html"><i class="fas fa-info-circle"></i></a></h1>
 	<div id="bring-wrapper">
 	<input type="search" id="bring" autocapitalize="off" onsearch="run(bringbox.value)" autofocus>
-	<button onclick="run(document.getElementById('bring').value)"><i class="fas fa-chevron-right"></i></button>
+	<button onclick="run(document.getElementById('bring').value)"><i class=	"fas fa-chevron-right"></i></button>
 	<button onclick="document.getElementById('bring').value = ''; document.querySelectorAll('message').forEach(e=>e.remove())"><i class="fas fa-times"></i></button>
-	<div id="messages">
-		
+	<div id="messages"></div>
 	</div>
-	</div>
+	<div id="windows"></div>
 	<script src="main.js" type="text/javascript" charset="utf-8"></script>
 </body>
 

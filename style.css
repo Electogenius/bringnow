@@ -4,7 +4,7 @@
 	color: white;
 }
 body{
-	background-color: #111;
+	background-color: #111 !important;
 	padding: 5px;
 }
 #bring{
@@ -57,7 +57,26 @@ button:hover{
 	float: right;
 	opacity: 0.5
 }
-window{
+window{ 
 	display: block;
-	
+	background-color: #222;
+	padding: 10px;
+	border-radius: 10px;
+	width: 95vw;
+	height: 95vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.win-close{
+	color: red;
+}
+.hidden{
+	display: none;
+}
+.results{
+	display: block;
+	border: none;
+	height: 70vh;
+	width: 80%;
 }

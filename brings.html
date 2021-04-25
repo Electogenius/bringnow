@@ -7,12 +7,15 @@ var doc =
 - clog: log to console/-
 - d: search with duckduckgo (leave parameters empty for duckduckgo search page)/-
 - g: search with google (leave parameters empty for google)/-
-- gh: searches github
+- gh: searches github/-
 - go: goes to a URL/-
-- how: searches WikiHow
+- help: goes to this page/-
+- how: searches WikiHow/-
+- popup: shows a popup displaying the input/-
 - save: displays saved text if parameters are left empty, otherwise saves text (to localStorage so data persists after browser window closes)/-
 - show: show a message/-
 - w: searches wikipedia/shows the page for the parameter/-
+- x: (tests)
 - yt: searches YouTube/-
 
 # Other things-#
@@ -52,7 +55,8 @@ window.onload=()=>{
 		border-bottom: 1px solid #fff
 	}
 	li{
-		padding-bottom: 0px
+		padding-bottom: 0px;
+		border-bottom: 1px solid #333;
 	}
 	a{
 		color: white;
@@ -63,6 +67,7 @@ window.onload=()=>{
 	code{
 		background-color: #222;
 		padding: 2px;
-		border-radius: 2px
+		border-radius: 2px;
+		font-family: menlo, monospace
 	}
 </style>
