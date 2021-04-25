@@ -74,9 +74,20 @@ a {
   font-size: 20px;
   color: #43f !important;
 }
-
 #bring-wrapper {
   text-align: center;
 }
 
 input { color: #fff; }
+
+#searchmarker{
+	font-size: 10px;
+}
+
+h1{
+	margin-bottom: 0px
+}
+#yes{
+	background-color: #333;
+	font-size: 20px
+}

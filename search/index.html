@@ -15,9 +15,11 @@
 </head>
 
 <body>
-	<h1>BringNow <a class="help" href="/brings.html"><i class="fas fa-info-circle"></i></a></h1>
+	<div id="yes">made by a certain <a href="https://github.com/liimee">genius who is a trillion times smarter than me</a></div>
+	<h1>BringNow</h1>
+	<small id="searchmarker">search</small>
 	<div id="bring-wrapper">
-	<input type="search" id="bring" autocapitalize="off" onsearch="run(bringbox.value)" autofocus>
+	<input type="search" id="bring" autocapitalize="off" onsearch="search(document.getElementById('bring').value)" autofocus>
 	<button onclick="search(document.getElementById('bring').value)"><i class="fas fa-chevron-right"></i></button>
 	<button onclick="document.getElementById('bring').value = ''; document.querySelectorAll('message').forEach(e=>e.remove())"><i class="fas fa-times"></i></button>
 	<div id="messages">
