@@ -16,7 +16,8 @@ body{
 	border-bottom: 1px solid #00ff69;
 	font-family: "Ubuntu Mono",monospace;
 	transition: border-bottom 0.5s;
-	background-color: #222
+	background-color: #222;
+	caret-color: #00ff69;
 }
 #bring:focus{
 	border-bottom: 5px solid #00ff69;
