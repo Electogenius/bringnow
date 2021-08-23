@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .msg {
@@ -16,6 +17,7 @@
   transition: transform .3s;
   color: #fff !important;
   text-decoration: none;
+  height: max-content;
 }
 
 .msg>div>div:nth-child(2) {
