@@ -29,11 +29,11 @@
 	<script src="main.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		if (window.location.href.includes("?")) {
-			var x = (window.location.search.replace(/\+/, '%20'))
-			run(decodeURI(x.split(1, x.length)))
+			var x = (window.location.search.replace(/\+/g, '%20'))
+			run(decodeURI(x.slice(1)))
 		}
 		setTimeout(function() {
-			window.location = window.location.href.replace("run.html", "")
+			location = location.href.replace("run.html", "")
 		}, 500)
 	</script>
 </body>
