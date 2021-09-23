@@ -65,7 +65,8 @@ add("d", (term) => {
 add("g", (term) => {
 	window.location = "https://google.com/search?q=" + encodeURI(term)
 })
-add("go", (url) => window.location = url)
+add("go", (url) => {window.location = /^https?:\/\/.+$/.test(url)?url:"https://"+url
+		   })
 add("show", (text) => {
 	output(text.replace(/</g, "&lt;"))
 })
