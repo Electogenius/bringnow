@@ -33,7 +33,8 @@
 			run(decodeURI(x.slice(1)))
 		}
 		setTimeout(function() {
-			location = location.href.replace("run.html", "")
+			location.search=location.search.replace(/\+/g, '%20')
+			location = location.href.path="/"
 		}, 500)
 	</script>
 </body>
