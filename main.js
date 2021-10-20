@@ -1,9 +1,12 @@
 var brings = {}
 var bringbox = document.getElementById("bring")
 if (window.location.href.includes('?')) {
-	bringbox.value = decodeURI(window.location.href.slice(window.location.href.indexOf("?") + 1, window.location.href.length))
+	bringbox.value = decodeURI(location.search.slice(1))
 }
-
+if(window.location.href.includes('?run=')){
+	bringbox.value = decodeURI(location.search.slice(5).replace(/\+/g, "%20"))
+	setTimeout(e=>run(decodeURI(location.search.slice(5).replace(/\+/g, "%20"))), 200)
+}
 function run(code) {
 	if (!code) {
 		return "";
@@ -55,6 +58,9 @@ function popup(title, text) {
 	document.getElementById("windows").appendChild(win)
 	win.appendChild(cl)
 	win.appendChild(code)
+}
+function SE(url, query) {
+	window.location=url.replace(/%s/g, encodeURI(query))
 }
 add("clog", (l) => {
 	console.log(l)
