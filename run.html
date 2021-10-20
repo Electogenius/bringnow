@@ -24,18 +24,19 @@
 
 <body>
 	<input type="search" name="" id="bring" value="" />
+	deprecated, use <code>/?run={query}</code>
 	<div id="messages">
 	</div>
 	<script src="main.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
-		if (window.location.href.includes("?")) {
+		/*if (window.location.href.includes("?")) {
 			var x = (window.location.search.replace(/\+/g, '%20'))
 			run(decodeURI(x.slice(1)))
 		}
 		setTimeout(function() {
 			location.search=location.search.replace(/\+/g, '%20')
 			location = location.href.path="/"
-		}, 500)
+		}, 500)*/
 	</script>
 </body>
 

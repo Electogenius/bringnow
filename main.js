@@ -90,7 +90,7 @@ add("yt", (term) => {
 add("ama", (term) => {
 	open("https://www.amazon.com/s?k=" + encodeURI(term))
 })
-add("ww", (term) => {
+add("w", (term) => {
 	window.location = "https://en.wikipedia.org/w/index.php?search=" + encodeURI(term) + "&title=Special%3ASearch&go=Go&ns0=1"
 })
 add("how", (term) => {
@@ -116,4 +116,7 @@ document.querySelector(".ZINbbc.xpd.O9g5cc.uUPGi").forEach(e=>e.style.background
 		//console.log(r.contents)
 		popup("results", "<iframe class='results' srcdoc='" + r.contents.replace(/'/, "\\'") + "<script>" + script + "</script>'></iframe>")
 	})
+})
+add("help", ()=>{
+	location="/brings.html"
 })
