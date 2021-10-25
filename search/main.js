@@ -1,6 +1,6 @@
 function search(a) {
   document.querySelector('#messages').innerHTML = '';
-  fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://bringnow-eg-server.vercel.app/api?search=' + a)}`)
+  fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://bringnow-eg-server.vercel.app/api?search=' + a)}&cache=${new Date().getTime()}`)
     .then(response => {
       if (response.ok) return response.json()
       throw new Error('Network response was not ok.')
