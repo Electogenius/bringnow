@@ -59,7 +59,7 @@ function popup(title, text) {
 	win.appendChild(cl)
 	win.appendChild(code)
 }
-function SE(url, query) {
+function SE(url, query) {//Search engine
 	window.location=url.replace(/%s/g, encodeURI(query))
 }
 add("clog", (l) => {
