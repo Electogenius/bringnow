@@ -1,11 +1,11 @@
 var brings = {}
 var bringbox = document.getElementById("bring")
 if (window.location.href.includes('?')) {
-	bringbox.value = decodeURI(location.search.slice(1))
+	bringbox.value = decodeURIComponent(location.search.slice(1))
 }
 if(window.location.href.includes('?run=')){
-	bringbox.value = decodeURI(location.search.slice(5).replace(/\+/g, "%20"))
-	setTimeout(e=>run(decodeURI(location.search.slice(5).replace(/\+/g, "%20"))), 200)
+	bringbox.value = decodeURIComponent(location.search.slice(5).replace(/\+/g, "%20"))
+	setTimeout(e=>run(decodeURIComponent(location.search.slice(5).replace(/\+/g, "%20"))), 200)
 }
 function run(code) {
 	if (!code) {
@@ -60,16 +60,16 @@ function popup(title, text) {
 	win.appendChild(code)
 }
 function SE(url, query) {//Search engine
-	window.location=url.replace(/%s/g, encodeURI(query))
+	window.location=url.replace(/%s/g, encodeURIComponent(query))
 }
 add("clog", (l) => {
 	console.log(l)
 })
 add("d", (term) => {
-	window.location = "https://duckduckgo.com/?q=" + encodeURI(term)
+	window.location = "https://duckduckgo.com/?q=" + encodeURIComponent(term)
 })
 add("g", (term) => {
-	window.location = "https://google.com/search?q=" + encodeURI(term)
+	window.location = "https://google.com/search?q=" + encodeURIComponent(term)
 })
 add("go", (url) => {window.location = /^https?:\/\/.+$/.test(url)?url:"https://"+url
 		   })
@@ -85,25 +85,25 @@ add("save", (text) => {
 	}
 })
 add("yt", (term) => {
-	open("https://youtube.com/results?search_query=" + encodeURI(term))
+	open("https://youtube.com/results?search_query=" + encodeURIComponent(term))
 })
 add("ama", (term) => {
-	open("https://www.amazon.com/s?k=" + encodeURI(term))
+	open("https://www.amazon.com/s?k=" + encodeURIComponent(term))
 })
 add("w", (term) => {
-	window.location = "https://en.wikipedia.org/w/index.php?search=" + encodeURI(term) + "&title=Special%3ASearch&go=Go&ns0=1"
+	window.location = "https://en.wikipedia.org/w/index.php?search=" + encodeURIComponent(term) + "&title=Special%3ASearch&go=Go&ns0=1"
 })
 add("how", (term) => {
-	window.location = "https://www.wikihow.com/wikiHowTo?search=" + encodeURI(term)
+	window.location = "https://www.wikihow.com/wikiHowTo?search=" + encodeURIComponent(term)
 })
 add("gh", (term) => {
-	window.location = "https://github.com/search?q=" + encodeURI(term)
+	window.location = "https://github.com/search?q=" + encodeURIComponent(term)
 })
 add("popup", (text) => {
 	popup("custom window", text.replace(/</g, "&lt;"))
 })
 add("x", (term) => {
-	window.fetch(encodeURI("https://api.allorigins.win/get?url=https://google.com/search?q=" + term)).then(response => {
+	window.fetch(encodeURIComponent("https://api.allorigins.win/get?url=https://google.com/search?q=" + term)).then(response => {
 		return response.json()
 	}).then(r => {
 		var script = `
