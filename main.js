@@ -127,3 +127,5 @@ add("date", () => {
 add("time", () => {
 	output(new Date().toTimeString())
 })
+
+window.onkeydown=()=>bringbox.focus()
