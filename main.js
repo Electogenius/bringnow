@@ -3,9 +3,9 @@ var bringbox = document.getElementById("bring")
 if (window.location.href.includes('?')) {
 	bringbox.value = decodeURIComponent(location.search.slice(1))
 }
-if(window.location.href.includes('?run=')){
+if (window.location.href.includes('?run=')) {
 	bringbox.value = decodeURIComponent(location.search.slice(5).replace(/\+/g, "%20"))
-	setTimeout(e=>run(decodeURIComponent(location.search.slice(5).replace(/\+/g, "%20"))), 200)
+	setTimeout(e => run(decodeURIComponent(location.search.slice(5).replace(/\+/g, "%20"))), 200)
 }
 function run(code) {
 	if (!code) {
@@ -60,7 +60,7 @@ function popup(title, text) {
 	win.appendChild(code)
 }
 function SE(url, query) {//Search engine
-	window.location=url.replace(/%s/g, encodeURIComponent(query))
+	window.location = url.replace(/%s/g, encodeURIComponent(query))
 }
 add("clog", (l) => {
 	console.log(l)
@@ -71,8 +71,9 @@ add("d", (term) => {
 add("g", (term) => {
 	window.location = "https://google.com/search?q=" + encodeURIComponent(term)
 })
-add("go", (url) => {window.location = /^https?:\/\/.+$/.test(url)?url:"https://"+url
-		   })
+add("go", (url) => {
+	window.location = /^https?:\/\/.+$/.test(url) ? url : "https://" + url
+})
 add("show", (text) => {
 	output(text.replace(/</g, "&lt;"))
 })
@@ -117,6 +118,12 @@ document.querySelector(".ZINbbc.xpd.O9g5cc.uUPGi").forEach(e=>e.style.background
 		popup("results", "<iframe class='results' srcdoc='" + r.contents.replace(/'/, "\\'") + "<script>" + script + "</script>'></iframe>")
 	})
 })
-add("help", ()=>{
-	location="/brings.html"
+add("help", () => {
+	location = "/brings.html"
+})
+add("date", () => {
+	output(new Date().toDateString())
+})
+add("time", () => {
+	output(new Date().toTimeString())
 })
