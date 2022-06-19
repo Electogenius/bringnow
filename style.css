@@ -45,7 +45,8 @@ message{
 	display: block;
 	font-size: 20px;
 	padding: 5px;
-	margin-top: 5px
+	margin-top: 5px;
+	overflow: auto;
 }
 a{
 	font-size: 20px;
@@ -66,9 +67,12 @@ window{
 	border-radius: 10px;
 	width: 95vw;
 	height: 95vh;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
+}
+window > div{
+	overflow: auto
 }
 .win-close{
 	color: red;

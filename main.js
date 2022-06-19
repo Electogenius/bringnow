@@ -59,17 +59,17 @@ function popup(title, text) {
 	win.appendChild(cl)
 	win.appendChild(code)
 }
-function SE(url, query) {//Search engine
+function se(url, query) {//Search engine
 	window.location = url.replace(/%s/g, encodeURIComponent(query))
 }
 add("clog", (l) => {
 	console.log(l)
 })
 add("d", (term) => {
-	window.location = "https://duckduckgo.com/?q=" + encodeURIComponent(term)
+	se("https://duckduckgo.com/?q=%s", term)
 })
 add("g", (term) => {
-	window.location = "https://google.com/search?q=" + encodeURIComponent(term)
+	se("https://google.com/search?q=%s", term)
 })
 add("go", (url) => {
 	window.location = /^https?:\/\/.+$/.test(url) ? url : "https://" + url
@@ -86,19 +86,19 @@ add("save", (text) => {
 	}
 })
 add("yt", (term) => {
-	open("https://youtube.com/results?search_query=" + encodeURIComponent(term))
+	se("https://youtube.com/results?search_query=%s", term)
 })
 add("ama", (term) => {
-	open("https://www.amazon.com/s?k=" + encodeURIComponent(term))
+	se("https://www.amazon.com/s?k=%s", term)
 })
 add("w", (term) => {
-	window.location = "https://en.wikipedia.org/w/index.php?search=" + encodeURIComponent(term) + "&title=Special%3ASearch&go=Go&ns0=1"
+	se("https://en.wikipedia.org/w/index.php?search=%s&title=Special%3ASearch&go=Go&ns0=1", term)
 })
 add("how", (term) => {
-	window.location = "https://www.wikihow.com/wikiHowTo?search=" + encodeURIComponent(term)
+	se("https://www.wikihow.com/wikiHowTo?search=%s", term)
 })
 add("gh", (term) => {
-	window.location = "https://github.com/search?q=" + encodeURIComponent(term)
+	se("https://github.com/search?q=%s", term)
 })
 add("popup", (text) => {
 	popup("custom window", text.replace(/</g, "&lt;"))
@@ -119,7 +119,7 @@ document.querySelector(".ZINbbc.xpd.O9g5cc.uUPGi").forEach(e=>e.style.background
 	})
 })
 add("help", () => {
-	location = "/brings.html"
+	location = "/brings"
 })
 add("date", () => {
 	output(new Date().toDateString())
@@ -127,5 +127,13 @@ add("date", () => {
 add("time", () => {
 	output(new Date().toTimeString())
 })
-
+add("new", (a)=>{
+    location=`http://${a}.new`
+})
+add("weather",(a)=>{
+    output(`<img src='https://wttr.in/${a}_pq0.png' />`)
+})
+add("forecast",(a)=>{
+    popup("Weather forecast",`<img src='https://wttr.in/${a}_q.png' />`)
+})
 window.onkeydown=()=>bringbox.focus()
