@@ -136,4 +136,5 @@ add("weather",(a)=>{
 add("forecast",(a)=>{
     popup("Weather forecast",`<img src='https://wttr.in/${a}_q.png' />`)
 })
+add("u", (term)=>se("https://you.com/search?q=%s", term))
 window.onkeydown=()=>bringbox.focus()
