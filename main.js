@@ -3,6 +3,9 @@ let bringbox = document.getElementById("bring")
 
 //custom brings:
 let custom = {}
+if("bn-custom" in localStorage){
+    custom = JSON.parse(localStorage["bn-custom"])
+}
 
 if (window.location.href.includes('?')) {
 	bringbox.value = decodeURIComponent(location.search.slice(1))
@@ -20,7 +23,7 @@ function run(code) {
 	if (c in brings) {
 		brings[c](text)
 	} else if (c in custom) {
-		custom[c](text)
+		se(custom[c],text)
 	} else {
 
 		output("It seems the bring (command) ‘" + c.replace(/</g, "&lt;") + "’ hasn't been added yet.")
@@ -167,5 +170,8 @@ function addCustom() {
 	let cmdname = document.getElementById('cmdname').value
 	let cmdurl = document.getElementById('cmdurl').value
 
-	custom[cmdname] = term => se(cmdurl, term)
+	custom[cmdname] = cmdurl
+	//(term => se(cmdurl, term))
+	
+	localStorage.setItem("bn-custom", JSON.stringify(custom))
 }
