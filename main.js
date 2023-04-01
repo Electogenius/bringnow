@@ -146,18 +146,24 @@ add("forecast", (a) => {
 add("u", (term) => se("https://you.com/search?q=%s", term))
 add("mdn", term => se("https://developer.mozilla.org/en-US/search?q=%s", term))
 window.onkeydown = (ev) => {
-	if(ev.key == "Enter") document.getElementById("enter").click()
-	bringbox.focus()
+	if (ev.key == "Enter") {
+		document.getElementById("enter").click()
+	} else if(ev.key != "Tab") bringbox.focus()
 }
 
 // serious stuff
 add("add", () => {
 	let popup = document.getElementById('new-popup')
-	document.body.appendChild(popup)
-	popup.showModal()
+
+	let test = true
+	popup.showModal();
+	setTimeout(()=>{
+	if(!popup.open){
+		output("Please use the '>' button for this command")
+	}}, 100)
 })
 
-function addCustom(){
+function addCustom() {
 	let cmdname = document.getElementById('cmdname').value
 	let cmdurl = document.getElementById('cmdurl').value
 
