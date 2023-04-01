@@ -1,5 +1,9 @@
-var brings = {}
-var bringbox = document.getElementById("bring")
+let brings = {}
+let bringbox = document.getElementById("bring")
+
+//custom brings:
+let custom = {}
+
 if (window.location.href.includes('?')) {
 	bringbox.value = decodeURIComponent(location.search.slice(1))
 }
@@ -13,9 +17,12 @@ function run(code) {
 	}
 	var c = firstSpaceSplit(code)[0].toLowerCase()
 	var text = firstSpaceSplit(code)[1]
-	if (brings[c] != undefined) {
+	if (c in brings) {
 		brings[c](text)
+	} else if (c in custom) {
+		custom[c](text)
 	} else {
+
 		output("It seems the bring (command) ‘" + c.replace(/</g, "&lt;") + "’ hasn't been added yet.")
 	}
 }
@@ -34,7 +41,7 @@ function add(name, funct) {
 function output(text) {
 	var m = document.createElement("message")
 	m.innerHTML = text
-	m.onclick = () => {
+	m.onclick = (event) => {
 		event.target.remove()
 	}
 	document.getElementById('messages').appendChild(m)
@@ -127,15 +134,32 @@ add("date", () => {
 add("time", () => {
 	output(new Date().toTimeString())
 })
-add("new", (a)=>{
-    location=`http://${a}.new`
+add("new", (a) => {
+	location = `http://${a}.new`
 })
-add("weather",(a)=>{
-    output(`<img src='https://wttr.in/${a}_pq0.png' />`)
+add("weather", (a) => {
+	output(`<img src='https://wttr.in/${a}_pq0.png' />`)
 })
-add("forecast",(a)=>{
-    popup("Weather forecast",`<img src='https://wttr.in/${a}_q.png' />`)
+add("forecast", (a) => {
+	popup("Weather forecast", `<img src='https://wttr.in/${a}_q.png' />`)
 })
-add("u", (term)=>se("https://you.com/search?q=%s", term))
+add("u", (term) => se("https://you.com/search?q=%s", term))
 add("mdn", term => se("https://developer.mozilla.org/en-US/search?q=%s", term))
-window.onkeydown=()=>bringbox.focus()
+window.onkeydown = (ev) => {
+	if(ev.key == "Enter") document.getElementById("enter").click()
+	bringbox.focus()
+}
+
+// serious stuff
+add("add", () => {
+	let popup = document.getElementById('new-popup')
+	document.body.appendChild(popup)
+	popup.showModal()
+})
+
+function addCustom(){
+	let cmdname = document.getElementById('cmdname').value
+	let cmdurl = document.getElementById('cmdurl').value
+
+	custom[cmdname] = term => se(cmdurl, term)
+}

@@ -27,7 +27,7 @@ body{
 #bring-wrapper{
 	text-align: center;
 }
-button{
+#bring-wrapper button{
 	border-radius: 5px;
 	background-color: #000;
 	border: none;
@@ -85,4 +85,9 @@ window > div{
 	border: none;
 	height: 70vh;
 	width: 80%;
+}
+
+dialog * {
+	color: #000;
+	margin: 5px;
 }
