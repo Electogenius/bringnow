@@ -25,7 +25,7 @@ function process(obj) {
 }
 
 // merge builtins and customs
-brings = process(data.brings)
+brings = {...brings, ...process(data.brings)}
 function save() {
 	localStorage.setItem("bn-data", JSON.stringify(data))
 }
@@ -87,7 +87,7 @@ function addSE() {
 	let cmdurl = document.getElementById('cmdurl').value
 
 	data.brings[cmdname] = `location.href=atob('${btoa(cmdurl)}').replace(/%s/g,arg)`
-	brings = process(data.brings)
+	brings = {...brings, ...process(data.brings)}
 
 	save()
 }
