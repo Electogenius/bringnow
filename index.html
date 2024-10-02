@@ -7,7 +7,6 @@
     <title>BringNow</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap" rel="stylesheet">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="/logo.png">
@@ -15,7 +14,7 @@
 </head>
 
 <body>
-    <h1>BringNow <a class="help" href="/brings.html"><i class="fas fa-info-circle"></i></a></h1>
+    <h1><span id="title">BringNow 2</span> <a class="help" href="/brings.html"><i class="fas fa-info-circle"></i></a></h1>
     <div id="bring-wrapper">
         <input type="search" id="bring" autocapitalize="off" onsearch="run(bringbox.value)" autofocus>
         <button id="enter" onclick="run(document.getElementById('bring').value)"><i class="fas fa-chevron-right"></i></button>
@@ -30,11 +29,11 @@
             <br> <input id="cmdurl" placeholder="URL with %s in place of query" type="url"
                 style="font-size: 0.75em; width: 400px;"
             />
-            <button onclick="addCustom()">OK</button>
+            <button onclick="addSE()">OK</button>
             <button>Cancel</button>
         </form>
     </dialog>
-    <script src="main.js" type="text/javascript" charset="utf-8"></script>
+    <script src="main2.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Manage commands</title>
+	<style>
+		*{box-sizing: border-box;}
+		table{
+			width: 100%;
+			height: 95vh;
+			transition: 0.2s opacity;
+		}
+		td{border: 1px solid black;vertical-align: top;padding: .5em;overflow: scroll;min-width: 15vw;}
+		#heading{
+			height: 2em;
+		}
+		#cmdsw{
+			width: 15em;
+		}
+		ul{
+			list-style: none;
+		}
+		li{margin-left: -20px;padding: .5em;}
+		textarea{width: 100%;}
+	</style>
+</head>
+
+<body>
+	<table id="table">
+		<tr id="heading">
+			<td colspan="2">
+				<h2>Manage custom commands</h2>
+				<div id="menu">
+					<button onclick="location='./'">&laquo; Back</button>
+					<button onclick="save();flash()">Save changes</button>
+					<button onclick="addCmd()">Add command</button>
+					<button onclick="delCmd()">Delete Selection</button>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td id="cmdsw">
+				<ul id="cmds"></ul>
+			</td>
+			<td>
+				<textarea id="editor" oninput="onEdit()"></textarea>
+			</td>
+		</tr>
+	</table>
+	<style id="highlight"></style>
+	<script>
+		let data = JSON.parse(localStorage.getItem("bn-data"))
+		let editing = ""
+		function editchange(){
+			highlight.innerText=`#menu${editing}{background-color:#4f47;}`
+		}
+		function save() {
+			localStorage.setItem("bn-data", JSON.stringify(data))
+		}
+		function flash(){
+			table.style.opacity='0'
+			setTimeout(()=>{
+				table.style.opacity='1'
+			},500)
+		}
+		function load() {
+			editor.value = ""
+			cmds.innerText=""
+			Object.keys(data.brings).forEach(name=>{
+				if(!name) return
+				let el = document.createElement("li")
+				el.innerText = name
+				el.id = "menu"+name
+				el.addEventListener('click', ()=>open(name))
+				document.getElementById('cmds').appendChild(el)
+			})
+		}
+		function onEdit(){
+			if (!editing) {editor.value = "";return}
+			data.brings[editing] = editor.value
+		}
+		function open(name){
+			editing = name
+			editchange()
+			editor.value = data.brings[name]
+		}
+		function addCmd(){
+			let name = prompt("Enter name or leave blank to cancel")
+			if (name) {
+				if (!/^([a-zA-Z\-_0-9])+$/.test(name)) {
+					alert("Invalid command name. Use only letters, numbers, hyphens and underscores.")
+					return
+				}
+				if(name in data.brings) {
+					alert("Already exists")
+				}
+				data.brings[name]=""
+				load()
+				open(name)
+			}
+
+		}
+		function delCmd(){
+			if (!editing) alert("Select command first")
+			if (confirm("Are you sure you want to delete "+editing)){
+				delete data.brings[editing]
+				load()
+				open(Object.keys(data.brings)[0])
+			}
+		}
+		load()
+	</script>
+</body>
+
+</html>

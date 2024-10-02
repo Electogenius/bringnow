@@ -1,12 +1,37 @@
+// To some extent, a rewrite
+
 let brings = {}
 let bringbox = document.getElementById("bring")
 
-//custom brings:
-let custom = {}
-if("bn-custom" in localStorage){
-    custom = JSON.parse(localStorage["bn-custom"])
+LOG = x => console.debug(x)
+
+/* Storage stuff */
+let data = {
+	brings: {},
+	defaultCmd: false,
+	startScripts: []
+}
+if ("bn-data" in localStorage) {
+	data = JSON.parse(localStorage.getItem("bn-data"))
+} else {
+	save()
+}
+function process(obj) {
+	let res={};
+	for (key in obj) {
+		res[key] = new Function("arg", obj[key])
+	}
+	return res
 }
 
+// merge builtins and customs
+brings = process(data.brings)
+function save() {
+	localStorage.setItem("bn-data", JSON.stringify(data))
+}
+
+
+// url stuff
 if (window.location.href.includes('?')) {
 	bringbox.value = decodeURIComponent(location.search.slice(1))
 }
@@ -14,33 +39,8 @@ if (window.location.href.includes('?run=')) {
 	bringbox.value = decodeURIComponent(location.search.slice(5).replace(/\+/g, "%20"))
 	setTimeout(e => run(decodeURIComponent(location.search.slice(5).replace(/\+/g, "%20"))), 200)
 }
-function run(code) {
-	if (!code) {
-		return "";
-	}
-	var c = firstSpaceSplit(code)[0].toLowerCase()
-	var text = firstSpaceSplit(code)[1]
-	if (c in brings) {
-		brings[c](text)
-	} else if (c in custom) {
-		se(custom[c],text)
-	} else {
 
-		output("It seems the bring (command) ‘" + c.replace(/</g, "&lt;") + "’ hasn't been added yet.")
-	}
-}
-
-function firstSpaceSplit(string) {
-	if (string.includes(" ")) {
-		return [string.slice(0, string.indexOf(" ")), string.slice(string.indexOf(" ") + 1, string.length)]
-	}
-	return [string, ""]
-}
-
-function add(name, funct) {
-	brings[name] = funct
-}
-
+// log
 function output(text) {
 	var m = document.createElement("message")
 	m.innerHTML = text
@@ -50,6 +50,76 @@ function output(text) {
 	document.getElementById('messages').appendChild(m)
 }
 
+// keygrabbing
+window.onkeydown = (ev) => {
+	if (ev.key == "Enter") {
+		document.getElementById("enter").click()
+	} else if (ev.key != "Tab") bringbox.focus()
+}
+
+// the big command
+function run(c) {
+	if (!c) return // blank
+	if (c.startsWith('https://') || c.startsWith('//')) {
+		brings.go(c) // url
+		return
+	}
+	let [cm, ...arg] = c.split(' ')
+
+	arg = arg.join(" "); cm = cm.toLowerCase()
+
+	if (cm in brings) {
+		brings[cm](arg)
+	} else if (data.defaultCmd) {
+		brings[data.defaultCmd](c)
+	} else {
+		output(`No command '${cm}' found.`)
+	}
+}
+
+// for copypastability/backwards compatibility only
+function add(name, fn) {
+	if (name in brings) return
+	brings[name] = fn
+}
+function addSE() {
+	let cmdname = document.getElementById('cmdname').value
+	let cmdurl = document.getElementById('cmdurl').value
+
+	data.brings[cmdname] = `location.href=atob('${btoa(cmdurl)}').replace(/%s/g,arg)`
+	brings = process(data.brings)
+
+	save()
+}
+
+
+////		begin commands		////
+
+add("add-se", () => {
+	let popup = document.getElementById('new-popup')
+	popup.showModal();
+	setTimeout(() => {
+		if (!popup.open) {
+			output("Please use the '>' button for this command")
+		}
+	}, 100)
+})
+
+add('manage', ()=>{
+	location.href = './manage'
+})
+
+add('set-default', arg => {
+	data.defaultCmd = arg.split` `[0]
+	save()
+	output("Done")
+})
+
+function se(url, query) {//Search engine
+	window.location = url.replace(/%s/g, encodeURIComponent(query))
+}
+
+// horrible disgusting function
 function popup(title, text) {
 	var win = document.createElement("window")
 	win.innerHTML = title.replace(/</g, "&lt;")
@@ -68,9 +138,7 @@ function popup(title, text) {
 	win.appendChild(cl)
 	win.appendChild(code)
 }
-function se(url, query) {//Search engine
-	window.location = url.replace(/%s/g, encodeURIComponent(query))
-}
+
 add("clog", (l) => {
 	console.log(l)
 })
@@ -112,21 +180,7 @@ add("gh", (term) => {
 add("popup", (text) => {
 	popup("custom window", text.replace(/</g, "&lt;"))
 })
-add("x", (term) => {
-	window.fetch(encodeURIComponent("https://api.allorigins.win/get?url=https://google.com/search?q=" + term)).then(response => {
-		return response.json()
-	}).then(r => {
-		var script = `
-setTimeout(()=>{
-document.body.style.display = "none"
-document.body.style.backgroundColor = "black"
-document.querySelector(".ZINbbc.xpd.O9g5cc.uUPGi").forEach(e=>e.style.backgroundColor = "black")
-},200)
-`
-		//console.log(r.contents)
-		popup("results", "<iframe class='results' srcdoc='" + r.contents.replace(/'/, "\\'") + "<script>" + script + "</script>'></iframe>")
-	})
-})
+
 add("help", () => {
 	location = "/brings"
 })
@@ -147,29 +201,3 @@ add("forecast", (a) => {
 })
 
 add("mdn", term => se("https://developer.mozilla.org/en-US/search?q=%s", term))
-window.onkeydown = (ev) => {
-	if (ev.key == "Enter") {
-		document.getElementById("enter").click()
-	} else if(ev.key != "Tab") bringbox.focus()
-}
-
-// serious stuff
-add("add", () => {
-	let popup = document.getElementById('new-popup')
-	let test = true
-	popup.showModal();
-	setTimeout(()=>{
-	if(!popup.open){
-		output("Please use the '>' button for this command")
-	}}, 100)
-})
-
-function addCustom() {
-	let cmdname = document.getElementById('cmdname').value
-	let cmdurl = document.getElementById('cmdurl').value
-
-	custom[cmdname] = cmdurl
-	//(term => se(cmdurl, term))
-	
-	localStorage.setItem("bn-custom", JSON.stringify(custom))
-}
