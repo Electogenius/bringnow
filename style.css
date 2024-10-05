@@ -23,8 +23,7 @@ body {
 	transition: border-bottom 0.5s;
 	background-color: #222;
 	caret-color: #00ff69;
-	caret-shape: block;
-	/*AA WHY DOES THIS NOT HAVE MUCH SUPPORT*/
+	caret-shape: block;/*AA WHY DOES THIS NOT HAVE MUCH SUPPORT*/
 }
 
 #bring:focus {

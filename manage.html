@@ -6,24 +6,69 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Manage commands</title>
 	<style>
-		*{box-sizing: border-box;}
-		table{
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: #111;
+			color: #fff;
+			font: 1.4em system-ui, sans-serif;
+		}
+
+		table {
 			width: 100%;
 			height: 95vh;
 			transition: 0.2s opacity;
 		}
-		td{border: 1px solid black;vertical-align: top;padding: .5em;overflow: scroll;min-width: 15vw;}
-		#heading{
+
+		td {
+			border: 1px solid #00ff6988;
+			border-radius: 5px;
+			vertical-align: top;
+			padding: .5em;
+			overflow: scroll;
+			min-width: 15vw;
+			color: #fff;
+		}
+
+		#heading {
 			height: 2em;
 		}
-		#cmdsw{
-			width: 15em;
+
+		#cmdsw {
+			width: 12em;
 		}
-		ul{
+
+		ul {
 			list-style: none;
 		}
-		li{margin-left: -20px;padding: .5em;}
-		textarea{width: 100%;}
+
+		li {
+			margin-left: -20px;
+			padding: .5em;
+			background-color: #222;
+			margin-bottom: 5px;
+			border-radius: 5px;
+		}
+
+		textarea {
+			width: 100%;
+			height: 40vh;
+			resize: none;
+			background-color: #111;
+			color: #bbb;
+			border: none;
+		}
+
+		button {
+			padding: 10px;
+			border: 1px solid #00ff69;
+			background-color: black;
+			color: #fff;
+			border-radius: 5px;
+			margin-right: 20px;
+		}
 	</style>
 </head>
 
@@ -31,12 +76,12 @@
 	<table id="table">
 		<tr id="heading">
 			<td colspan="2">
-				<h2>Manage custom commands</h2>
+				<h2 style="margin: 10px;">Manage custom commands</h2>
 				<div id="menu">
 					<button onclick="location='./'">&laquo; Back</button>
 					<button onclick="save();flash()">Save changes</button>
-					<button onclick="addCmd()">Add command</button>
-					<button onclick="delCmd()">Delete Selection</button>
+					<button onclick="addCmd();flash()">Add command</button>
+					<button onclick="delCmd();flash()">Delete Selection</button>
 				</div>
 			</td>
 		</tr>
@@ -53,58 +98,58 @@
 	<script>
 		let data = JSON.parse(localStorage.getItem("bn-data"))
 		let editing = ""
-		function editchange(){
-			highlight.innerText=`#menu${editing}{background-color:#4f47;}`
+		function editchange() {
+			highlight.innerText = `#menuitem${editing}{border: 2px solid #00ff69;}`
 		}
 		function save() {
 			localStorage.setItem("bn-data", JSON.stringify(data))
 		}
-		function flash(){
-			table.style.opacity='0'
-			setTimeout(()=>{
-				table.style.opacity='1'
-			},500)
+		function flash() {
+			table.style.opacity = '0'
+			setTimeout(() => {
+				table.style.opacity = '1'
+			}, 500)
 		}
 		function load() {
 			editor.value = ""
-			cmds.innerText=""
-			Object.keys(data.brings).forEach(name=>{
-				if(!name) return
+			cmds.innerText = ""
+			Object.keys(data.brings).forEach(name => {
+				if (!name) return
 				let el = document.createElement("li")
 				el.innerText = name
-				el.id = "menu"+name
-				el.addEventListener('click', ()=>open(name))
+				el.id = "menuitem" + name
+				el.addEventListener('click', () => open(name))
 				document.getElementById('cmds').appendChild(el)
 			})
 		}
-		function onEdit(){
-			if (!editing) {editor.value = "";return}
+		function onEdit() {
+			if (!editing) { editor.value = ""; return }
 			data.brings[editing] = editor.value
 		}
-		function open(name){
+		function open(name) {
 			editing = name
 			editchange()
 			editor.value = data.brings[name]
 		}
-		function addCmd(){
+		function addCmd() {
 			let name = prompt("Enter name or leave blank to cancel")
 			if (name) {
 				if (!/^([a-zA-Z\-_0-9])+$/.test(name)) {
 					alert("Invalid command name. Use only letters, numbers, hyphens and underscores.")
 					return
 				}
-				if(name in data.brings) {
+				if (name in data.brings) {
 					alert("Already exists")
 				}
-				data.brings[name]=""
+				data.brings[name] = ""
 				load()
 				open(name)
 			}
 
 		}
-		function delCmd(){
+		function delCmd() {
 			if (!editing) alert("Select command first")
-			if (confirm("Are you sure you want to delete "+editing)){
+			if (confirm("Are you sure you want to delete " + editing)) {
 				delete data.brings[editing]
 				load()
 				open(Object.keys(data.brings)[0])
