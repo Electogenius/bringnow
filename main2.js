@@ -92,7 +92,6 @@ function manageColor() {
 	}
 }
 bringbox.addEventListener('input', manageColor)
-bringbox.addEventListener('change', manageColor)
 
 // for copypastability/backwards compatibility only
 function add(name, fn) {
