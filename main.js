@@ -69,7 +69,7 @@ function popup(title, text) {
 	win.appendChild(code)
 }
 function se(url, query) {//Search engine
-	window.location = url.replace(/%s/g, encodeURIComponent(query))
+	window.location.replace(url.replace(/%s/g, encodeURIComponent(query)))
 }
 add("clog", (l) => {
 	console.log(l)
@@ -81,7 +81,7 @@ add("g", (term) => {
 	se("https://google.com/search?q=%s", term)
 })
 add("go", (url) => {
-	window.location = /^https?:\/\/.+$/.test(url) ? url : "https://" + url
+	window.location.replace(/^https?:\/\/.+$/.test(url) ? url : "https://" + url)
 })
 add("show", (text) => {
 	output(text.replace(/</g, "&lt;"))
