@@ -9,7 +9,7 @@ LOG = x => console.debug(x)
 let data = {
 	brings: {},
 	defaultCmd: false,
-	startScripts: []
+	startScripts: [],
 }
 if ("bn-data" in localStorage) {
 	data = JSON.parse(localStorage.getItem("bn-data"))
@@ -17,7 +17,7 @@ if ("bn-data" in localStorage) {
 	save()
 }
 function process(obj) {
-	let res={};
+	let res = {};
 	for (key in obj) {
 		res[key] = new Function("arg", obj[key])
 	}
@@ -25,7 +25,7 @@ function process(obj) {
 }
 
 // merge builtins and customs
-brings = {...brings, ...process(data.brings)}
+brings = { ...brings, ...process(data.brings) }
 function save() {
 	localStorage.setItem("bn-data", JSON.stringify(data))
 }
@@ -77,6 +77,23 @@ function run(c) {
 	}
 }
 
+// theme color changing
+function setTheme(color) {
+	themecolorstyle.innerHTML = `:root{--theme-color:${color}}`
+}
+function manageColor() {
+	let c = bringbox.value
+	const col = { normal: '#00ff69', notpresent: '#00ff6988' }
+	if (!c) setTheme(col.normal)
+	else if (c.split(' ')[0].toLowerCase() in brings) {
+		setTheme(col.normal)
+	} else {
+		setTheme(col.notpresent)
+	}
+}
+bringbox.addEventListener('input', manageColor)
+bringbox.addEventListener('change', manageColor)
+
 // for copypastability/backwards compatibility only
 function add(name, fn) {
 	if (name in brings) return
@@ -87,7 +104,7 @@ function addSE() {
 	let cmdurl = document.getElementById('cmdurl').value
 
 	data.brings[cmdname] = `location.replace(atob('${btoa(cmdurl)}').replace(/%s/g,arg))`
-	brings = {...brings, ...process(data.brings)}
+	brings = { ...brings, ...process(data.brings) }
 
 	save()
 }
@@ -105,7 +122,7 @@ add("add-se", () => {
 	}, 100)
 })
 
-add('manage', ()=>{
+add('manage', () => {
 	location.href = './manage'
 })
 
