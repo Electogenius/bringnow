@@ -86,7 +86,7 @@ function addSE() {
 	let cmdname = document.getElementById('cmdname').value
 	let cmdurl = document.getElementById('cmdurl').value
 
-	data.brings[cmdname] = `location.href=atob('${btoa(cmdurl)}').replace(/%s/g,arg)`
+	data.brings[cmdname] = `location.replace(atob('${btoa(cmdurl)}').replace(/%s/g,arg))`
 	brings = {...brings, ...process(data.brings)}
 
 	save()
@@ -149,7 +149,7 @@ add("g", (term) => {
 	se("https://google.com/search?q=%s", term)
 })
 add("go", (url) => {
-	window.location = /^https?:\/\/.+$/.test(url) ? url : "https://" + url
+	window.location.replace(/^https?:\/\/.+$/.test(url) ? url : "https://" + url)
 })
 add("show", (text) => {
 	output(text.replace(/</g, "&lt;"))
